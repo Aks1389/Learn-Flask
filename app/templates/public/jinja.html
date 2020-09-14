@@ -1,0 +1,128 @@
+{% extends "public/templates/public_template.html" %}
+
+{% import "macros/input_macros.html" as im %}
+
+{% block title %} Jinja {% endblock %}
+
+{% block main %}
+
+ <div class="container">
+     <div class="row">
+         <div class="col">
+             <h1>Jinja templates</h1>
+             <hr>
+             <h4>Variables</h4>
+             <p>Name: {{ my_name }}</p>
+
+             <hr>
+             <h4>Looping</h4>
+             <ul>
+                {% for lang in langs %}
+                <li>{{ lang }}</li>
+                {% endfor %}
+             </ul>
+
+             <hr>
+             <h4>Looping with index</h4>
+             <ul>
+                {% for lang in langs %}
+                <li>{{ loop.index }}: {{ lang }}</li>
+                {% endfor %}
+             </ul>
+
+             <hr>
+             <h4>Looping a dictionary</h4>
+             <ul>
+                {% for k, v in friends.items() %}
+                <li>{{ k }}: {{ v }}</li>
+                {% endfor %}
+             </ul>
+
+             <hr>
+             <h4>Looping a dictionary keys</h4>
+             <ul>
+                {% for k in friends.keys() %}
+                <li>{{ k }}</li>
+                {% endfor %}
+             </ul>
+
+             <hr>
+             <h4>Access list member</h4>
+             <p>{{ langs[0] }}</p>
+
+             <hr>
+             <h4>Access dict member</h4>
+             <p>{{ friends["Tom"] }}</p>
+
+             <hr>
+             <h4>Access class attribute</h4>
+             <p>{{ my_remote.name }}</p>
+
+             <hr>
+             <h4>Unpack variables</h4>
+             {% set a, b = colours %}
+             <p>{{ a }}</p>
+             <p>{{ b }}</p>
+
+             <hr>
+             <h4>Call a function</h4>
+             <p>{{ repeat("FLASK IS AWESOME ", 10) }}</p>
+
+             <hr>
+             <h4>Call a class method</h4>
+             <p>{{ my_remote.clone() }}</p>
+
+             <hr>
+             <h4>Conditionals</h4>
+             {% if cool %}
+                <p>Cool is {{cool}}</p>
+             {% endif %}
+
+             <hr>
+             <h4>Comparison</h4>
+             {% if age < 18 %}
+             <p>No entry</p>
+             {% elif age < 26 %}
+             <p>Nearly old enough</p>
+             {% else %}
+             <p>You may enter</p>
+             {% endif %}
+
+             <hr>
+             <h4>Template filters</h4>
+             <p>{{ langs|length }}</p>
+             <p>{{ my_name|reverse }}</p>
+             <p>{{ my_name|upper }}</p>
+
+             <hr>
+             <h4>Template filters - join</h4>
+             <p>{{ langs|join(", ") }}</p>
+             
+
+             <hr>
+             <h4>Custom filters</h4>
+             <p>Raw: {{ date }}</p>
+             <p>Cleaned: {{ date|clean_date }}</p>
+
+             <hr>
+             <h4>Escaping</h4>
+             {{my_html}}
+             {{my_html|safe}}
+
+             <hr>
+             <h4>Suspicious</h4>
+             {{suspicious}}
+             <br>
+             
+             <hr>
+             <h4>Macros</h4>
+             
+
+             {{ im.input(label="Your name", name="name", id="name", placeholder="Enter your name") }}
+             {{ im.input(label="Your Age", name="age", id="age", placeholder="Enter your age") }}
+             {{ im.input(label="Your Password", name="password", id="password", placeholder="Enter your password") }}
+         </div>
+     </div>
+ </div>
+
+{% endblock %}
