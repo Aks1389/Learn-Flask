@@ -8,6 +8,9 @@ def clean_date(dt):
 
 @app.route("/")
 def index():
+    print("Env: " + app.config['ENV'])
+    print("Env: " + app.config['DB_NAME'])
+    
     return render_template("public/index.html")
 
 @app.route("/jinja")
