@@ -1,2 +1,7 @@
+macos
 export FLASK_APP=app.py
 export FLASK_ENV=development
+
+windows
+$Env:FLASK_APP = app.py
+$Env:FLASK_ENV = development

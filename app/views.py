@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, jsonify, make_response, send_from_directory, abort, session, url_for
+from flask import render_template, request, redirect, jsonify, make_response, send_from_directory, abort, session, url_for, flash
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
@@ -72,7 +72,7 @@ def jinja():
 def about():
     return render_template("public/about.html")
 
-@app.route("/sign-up", methods=["GET", "POST"])
+""" @app.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
 
     if request.method == "POST":
@@ -85,7 +85,7 @@ def sign_up():
         print(username, email, password)
 
         return redirect(request.url)
-    return render_template("public/sign_up.html")
+    return render_template("public/sign_up.html") """
 
 """ users = {
     "mitsuhiko": {
@@ -324,3 +324,22 @@ def profile():
 def sign_out():
     session.pop("USERNAME", None)
     return redirect(url_for("sign_in"))
+
+#Ls 17
+@app.route("/sign-up", methods=["GET", "POST"])
+def sign_up():
+
+    if request.method == "POST":
+        req = request.form
+        
+        username = req["username"]
+        email = req.get("email")
+        password = request.form["password"]
+
+        if not len(password) >= 10:
+            flash("Password must be at least 10 characters in length", "warning")
+            redirect(request.url)
+        else:
+            flash("Account created!", "success")
+        return redirect(request.url)
+    return render_template("public/sign_up.html")
