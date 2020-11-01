@@ -10,3 +10,4 @@ else:
 
 from app import views
 from app import admin_views
+from app import error_handlers
